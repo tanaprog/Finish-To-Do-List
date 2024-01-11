@@ -1,9 +1,8 @@
-
 const form = document.getElementById('task-area');
 const inputTask = document.getElementById('single-task');
-const buttonAdd = document.getElementById('btn');
 const tasksUl = document.getElementById('task');
 const taskLi = document.getElementById('list-group-item');
+const textError = document.getElementById('text-error');
 
 let TASK_LIST = [];
 
@@ -28,20 +27,15 @@ function completeTaskForId(id) {
     findTask.isCompleted = !findTask.isCompleted;
 }
 
-
-function changePosition(id) {
+function changePosition(id, action) {
     const position = TASK_LIST.findIndex((tsk) => tsk.id === id);
+    if (action === up){
 
-    if (!(position === 0) && !(!position === TASK_LIST.length - 1)) {
-        const positionChange = (position) ? -1 : 1;
-
-        TASK_LIST[position].position += positionChange;
-        TASK_LIST[position + positionChange].position += positionChange * -1;
-
-        TASK_LIST.sort((a, b) => a.position - b.position);
+    }
+    if (action === down){
+        
     }
 }
-
 
 function getInputText(event) {
     event.preventDefault();
@@ -85,14 +79,19 @@ function renderTasks() {
     });
 }
 
+function emptyTask() {
+    const text = createElement('p', 'textP');
+    text.innerHTML = 'You must to Add a task...';
+    textError.innerHTML = "";
+    textError.appendChild(text);
+}
+
 function addTaskController(e) {
     const text = getInputText(e);
+    textError.innerHTML = "";
 
     if (inputTask.value === '') {
-        const text = createElement('p', 'textP');
-        text.innerHTML = 'You must to Add a task...';
-        tasksUl.innerHTML = '';
-        tasksUl.appendChild(text);
+        emptyTask();
     } else {
         const newTask = {
             id: Math.floor(Math.random() * 200) + 1,
@@ -100,11 +99,12 @@ function addTaskController(e) {
             isCompleted: false,
             position: 0,
         };
-
+        
         removeInputText();
         addNewTask(newTask);
         renderTasks();
     }
+    console.log(TASK_LIST)
 }
 
 function actionTaskController(e) {
@@ -119,7 +119,7 @@ function actionTaskController(e) {
     }
 
     if (action === 'up' || action === 'down') {
-        changePosition(id);
+        changePosition(id, action);
     }
 
     renderTasks();
