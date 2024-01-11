@@ -33,7 +33,7 @@ function changePosition(id, action) {
 
     }
     if (action === down){
-        
+
     }
 }
 
@@ -90,7 +90,7 @@ function addTaskController(e) {
     const text = getInputText(e);
     textError.innerHTML = "";
 
-    if (inputTask.value === '') {
+    if (!text) {
         emptyTask();
     } else {
         const newTask = {
