@@ -134,6 +134,8 @@ function actionTaskController(e) {
 }
 // Сделали изменения
 
+// Поправил замечание
+
 function init() {
   renderTasks();
 
