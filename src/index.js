@@ -29,11 +29,11 @@ function completeTaskForId(id) {
 
 function changePosition(id, action) {
     const position = TASK_LIST.findIndex((tsk) => tsk.id === id);
-    if (action === up){
-
+    if (action === "up") {
+        TASK_LIST[position + 1] = TASK_LIST.splice(position, 1, TASK_LIST[position + 1])[0];
     }
-    if (action === down){
-
+    if (action === "down") {
+        TASK_LIST[position + 1] = TASK_LIST.splice(position, 1, TASK_LIST[position + 1])[0];
     }
 }
 
@@ -99,7 +99,7 @@ function addTaskController(e) {
             isCompleted: false,
             position: 0,
         };
-        
+
         removeInputText();
         addNewTask(newTask);
         renderTasks();
