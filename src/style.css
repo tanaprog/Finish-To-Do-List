@@ -53,7 +53,6 @@ li {
 
 .task-title {
     font-size: 18px;
-    
 }
 
 .button {
@@ -61,6 +60,10 @@ li {
     cursor: pointer;
     border: none;
     /* background: transparent; */
+}
+
+.btn-action {
+    color: rgb(28, 25, 233);
 }
 
 .btn-action1 {
@@ -79,6 +82,14 @@ li {
 .checked{
     color: #555;
     text-decoration: line-through;
+}
+
+/* .inputForm{
+    display: block;
+} */
+
+.editable{
+    color: red;
 }
 
 .none {
@@ -101,3 +112,33 @@ li {
     border-right: 1px solid red;
     transform: rotate(135deg);
 }
+
+.input-edit {
+    margin: 0;
+    font-size: 18px;
+    line-height: 18px;
+    height: 18px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-radius: 6px;
+    font-family: Lato, sans-serif;
+    color: #888;
+    display: none;
+  }
+  
+  .input-edit.edit {
+    padding: 5px;
+    margin-right: 150px;
+    display: none;
+  }
+  
+  .active {
+    display: block;
+    color: rgb(206, 59, 174);
+  }
+  
+  .noactive {
+    display: none;
+  }
+  

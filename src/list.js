@@ -17,16 +17,6 @@ function addNewTask(newTask) {
     TASK_LIST.push(newTask);
 }
 
-function deleteTaskForId(id) {
-    const index = TASK_LIST.findIndex((tsk) => tsk.id === id);
-
-    TASK_LIST.splice(index, 1);
-}
-
-function completeTaskForId(id) {
-    const findTask = TASK_LIST.find((tsk) => tsk.id === id);
-    findTask.isCompleted = !findTask.isCompleted;
-}
 
 //////////////////////////////////////////////////
 
@@ -36,39 +26,48 @@ function editTask(id) {
     console.log(editTaskId)
 
     let editText = createElement('input', 'editable');
-    // editText.type = 'text';
-    let listT = document.querySelector('.task-title');
+    let listT = document.querySelector('.task-title')
     editText.value = editTaskId.text;
-    listT.innerHTML = '';
+    listT.innerHTML = ''
+    console.log(editTaskId.text)
     listT.appendChild(editText);
-    console.log(listT)
 
     editText.focus()
 
     editText.addEventListener('blur', () => {
-        listT.innerHTML = editText.value;
+        listT.innerHTML = editText.value
     });
 }
 
 ///////////////////////////////////////////////////
 
-function changePosition(id, action) {
-    const oldIndex = TASK_LIST.findIndex((tsk) => tsk.id === id);
-    let newIndex;
-    if (action === "up") {
-        if (oldIndex === 0) return;
-        newIndex = oldIndex - 1;
-        const moveTask = TASK_LIST.splice(oldIndex, 1)[0];
-        TASK_LIST.splice(newIndex, 0, moveTask)
-    }
-    if (action === "down") {
-        if (oldIndex === TASK_LIST.length - 1) return;
-        newIndex = oldIndex + 1;
 
-        const moveTask = TASK_LIST.splice(oldIndex, 1)[0];
-        TASK_LIST.splice(newIndex, 0, moveTask);
-    }
+function editTask1(id) {
+
+
+    // const editTaskId = TASK_LIST.find((tsk) => tsk.id === id);
+
+    // if (event.target.dataset.action === 'edit') {
+    // const parentNode = event.target.closest('.list-group-item');
+    //     let editText = document.createElement('input');
+    //     const taskTitle = document.querySelector('.task-title');
+    //     editText.value = taskTitle.textContent;
+    //     taskTitle.innerHTML = '';
+    //     taskTitle.appendChild(editText);
+
+    //     editText.focus()
+
+    //     editText.addEventListener('blur', () => {
+    //         taskTitle.textContent = editText.value
+
+    // parentNode.contentEditable = true
+    //     });
+    // }
 }
+
+//////////////////////////////////////////
+
+
 
 function getInputText(event) {
     event.preventDefault();
@@ -97,14 +96,9 @@ function renderTasks() {
         item.setAttribute('id', task.id);
 
         const taskUI = `
-                     <div class="${cssClass}">${task.text}</div>
+                     <span class="${cssClass}">${task.text}</span>
                      <div class="button">
                      <button type="button" data-action="edit" class="btn-action button">ed</button>
-                     <button type="button" data-action="up" class="button up"></button>
-                     <button type="button" data-action="down" class="button down"></button>
-                     
-                     <button type="button" data-action="done" class="btn-action1 button">ok</button>
-                     <button type="button" data-action="delete" class="btn-action2 button">x</button>
                      </div>
                     `;
 
@@ -144,17 +138,6 @@ function addTaskController(e) {
 function actionTaskController(e) {
     const id = getTaskId(e);
     const action = e.target.dataset.action;
-    if (action === 'done') {
-        completeTaskForId(id);
-    }
-
-    if (action === 'delete') {
-        deleteTaskForId(id);
-    }
-
-    if (action === 'up' || action === 'down') {
-        changePosition(id, action);
-    }
 
     if (action === 'edit') {
         editTask(id);
