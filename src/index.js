@@ -33,13 +33,14 @@ function completeTaskForId(id) {
 function editTask(id) {
 
     const editTaskId = TASK_LIST.find((tsk) => tsk.id === id);
-    console.log(editTaskId)
+
+    const textN = TASK_LIST.splice(editTaskId, 1)[0];
 
     let editText = createElement('input', 'editable');
-    // editText.type = 'text';
     let listT = document.querySelector('.task-title');
-    editText.value = editTaskId.text;
-    listT.innerHTML = '';
+    editText.value = textN.text;
+    TASK_LIST.push(textN)
+    listT.innerHTML = ''
     listT.appendChild(editText);
     console.log(listT)
 
@@ -89,7 +90,7 @@ function getTaskId(event) {
 }
 
 function renderTasks() {
-    // tasksUl.innerHTML = '';
+    tasksUl.innerHTML = '';
 
     TASK_LIST.forEach((task) => {
         const cssClass = task.isCompleted ? "task-title checked" : "task-title";
@@ -98,6 +99,7 @@ function renderTasks() {
 
         const taskUI = `
                      <div class="${cssClass}">${task.text}</div>
+                     
                      <div class="button">
                      <button type="button" data-action="edit" class="btn-action button">ed</button>
                      <button type="button" data-action="up" class="button up"></button>

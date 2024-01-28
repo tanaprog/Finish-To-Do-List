@@ -92,6 +92,10 @@ li {
     color: red;
 }
 
+.edit{
+    color: rgb(50, 29, 167);
+}
+
 .none {
     display: none !important;
 }
