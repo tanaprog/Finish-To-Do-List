@@ -1,16 +1,14 @@
 const form = document.getElementById('task-area');
 const inputTask = document.getElementById('single-task');
 const tasksUl = document.getElementById('task');
-const taskLi = document.querySelector('.list-group-item');
 const textError = document.getElementById('text-error');
-
 
 let TASK_LIST = [];
 
 function createElement(tag, className) {
     let element = document.createElement(tag);
     if (className) element.classList.add(className);
-    return element
+    return element;
 }
 
 function addNewTask(newTask) {
@@ -19,7 +17,6 @@ function addNewTask(newTask) {
 
 function deleteTaskForId(id) {
     const index = TASK_LIST.findIndex((tsk) => tsk.id === id);
-
     TASK_LIST.splice(index, 1);
 }
 
@@ -28,30 +25,15 @@ function completeTaskForId(id) {
     findTask.isCompleted = !findTask.isCompleted;
 }
 
-//////////////////////////////////////////////////
-
-function editTask(id) {
-
+function editTask(id, newTextId) {
     const editTaskId = TASK_LIST.find((tsk) => tsk.id === id);
-
-    const textN = TASK_LIST.splice(editTaskId, 1)[0];
-
-    let editText = createElement('input', 'editable');
-    let listT = document.querySelector('.task-title');
-    editText.value = textN.text;
-    TASK_LIST.push(textN)
-    listT.innerHTML = ''
-    listT.appendChild(editText);
-    console.log(listT)
-
-    editText.focus()
-
-    editText.addEventListener('blur', () => {
-        listT.innerHTML = editText.value;
-    });
+    editTaskId.text = newTextId;
 }
 
-///////////////////////////////////////////////////
+function editableTasks(id) {
+    const editTaskId = TASK_LIST.find((tsk) => tsk.id === id);
+    editTaskId.isEdit = !editTaskId.isEdit;
+}
 
 function changePosition(id, action) {
     const oldIndex = TASK_LIST.findIndex((tsk) => tsk.id === id);
@@ -89,22 +71,39 @@ function getTaskId(event) {
     return id;
 }
 
+function getTaskText(id) {
+    const textElemId = document.getElementById(id).children;
+    let textTask;
+
+    for (let elem of textElemId) {
+        if (elem.isContentEditable) {
+            textTask = elem.textContent;
+        }
+    }
+    return textTask;
+}
+
 function renderTasks() {
     tasksUl.innerHTML = '';
 
     TASK_LIST.forEach((task) => {
         const cssClass = task.isCompleted ? "task-title checked" : "task-title";
+        const editableClass = task.isEdit ? "border: 1px solid green" : "";
         const item = createElement('li', 'list-group-item');
         item.setAttribute('id', task.id);
 
         const taskUI = `
-                     <div class="${cssClass}">${task.text}</div>
+                     <span style = "${editableClass}" 
+                     contenteditable = ${task.isEdit}
+                     class="${cssClass}">${task.text}</span>
                      
                      <div class="button">
-                     <button type="button" data-action="edit" class="btn-action button">ed</button>
+                     ${task.isEdit
+                ? `<button type="button" data-action="save" class="btn-action button">save</button>`
+                : `<button type="button" data-action="edit" class="btn-action button">ed</button>`
+            }
                      <button type="button" data-action="up" class="button up"></button>
                      <button type="button" data-action="down" class="button down"></button>
-                     
                      <button type="button" data-action="done" class="btn-action1 button">ok</button>
                      <button type="button" data-action="delete" class="btn-action2 button">x</button>
                      </div>
@@ -134,35 +133,45 @@ function addTaskController(e) {
             id: Math.floor(Math.random() * 200) + 1,
             text: text,
             isCompleted: false,
+            isEdit: false,
         };
 
         removeInputText();
         addNewTask(newTask);
         renderTasks();
     }
-    // console.log(TASK_LIST)
 }
 
 function actionTaskController(e) {
     const id = getTaskId(e);
     const action = e.target.dataset.action;
+
     if (action === 'done') {
         completeTaskForId(id);
+        renderTasks();
     }
 
     if (action === 'delete') {
         deleteTaskForId(id);
+        renderTasks();
     }
 
     if (action === 'up' || action === 'down') {
         changePosition(id, action);
+        renderTasks();
     }
 
     if (action === 'edit') {
-        editTask(id);
+        editableTasks(id);
+        renderTasks();
     }
 
-    renderTasks();
+    if (action === 'save') {
+        const newText = getTaskText(id);
+        editTask(id, newText);
+        editableTasks(id);
+        renderTasks();
+    }
 }
 
 function init() {
