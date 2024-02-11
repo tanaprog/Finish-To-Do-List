@@ -23,8 +23,7 @@ h1 {
 #task-area {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;
-   
+    margin-bottom: 25px;   
 }
 
 #single-task {
@@ -53,14 +52,16 @@ li {
 
 .task-title {
     font-size: 18px;
-    
 }
 
 .button {
     font-size: 15px;
     cursor: pointer;
     border: none;
-    /* background: transparent; */
+}
+
+.btn-action {
+    color: rgb(28, 25, 233);
 }
 
 .btn-action1 {
@@ -81,8 +82,8 @@ li {
     text-decoration: line-through;
 }
 
-.none {
-    display: none !important;
+.editable{
+    color: red;
 }
 
 .up {
