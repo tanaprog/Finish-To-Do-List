@@ -25,14 +25,14 @@ function completeTaskForId(id) {
     findTask.isCompleted = !findTask.isCompleted;
 }
 
-function editTask(id, newTextId) {
+function editTask(id, newText) {
     const editTaskId = TASK_LIST.find((tsk) => tsk.id === id);
-    editTaskId.text = newTextId;
+    editTaskId.text = newText;
 }
 
 function editableTasks(id) {
-    const editTaskId = TASK_LIST.find((tsk) => tsk.id === id);
-    editTaskId.isEdit = !editTaskId.isEdit;
+    const editableTaskId = TASK_LIST.find((tsk) => tsk.id === id);
+    editableTaskId.isEdit = !editableTaskId.isEdit;
 }
 
 function changePosition(id, action) {
