@@ -1,15 +1,26 @@
+:root {
+    --background-body: #181513;
+    --background-wrapper: linear-gradient(135deg, #3b767e, #c7dfca);
+    --text-btn: #3a7780;
+    --background-btn: #c7dfca;
+    --background-li-teat: #fff;
+    --text-li: #000;
+    --text-checked: #555;
+    --text-emptyTask: rgb(167, 5, 5);
+}
+
 body {
     display: flex;
     justify-content: center;
-    background: #b69290;
+    background: var(--background-body);
 }
 
 #wrapper {
     margin: 140px auto;
     padding: 50px;
-    color: #fff;
-    background: radial-gradient(#353a4a, #000);
-    width: min(353px, 50%);
+    color: var(--background-li-teat);
+    background: var(--background-wrapper);
+    width: min(700px, 50%);
 }
 
 h1 {
@@ -23,7 +34,7 @@ h1 {
 #task-area {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 25px;   
+    margin-bottom: 25px;
 }
 
 #single-task {
@@ -34,71 +45,51 @@ h1 {
 
 #btn {
     font-size: 18px;
-    background: #b69290;
+    color: var(--text-btn);
+    background: var(--background-btn);
     padding: 10px 15px;
     cursor: pointer;
-    border: none;
+    border-color: var(--text-btn);
+    font-weight: bold;
+}
+
+#btn:hover {
+    color: var(--background-li-teat);
 }
 
 li {
     display: flex;
     justify-content: space-between;
     list-style-type: none;
-    background: #fff;
-    color: #000;
+    background: var(--background-li-teat);
+    color: var(--text-li);
     padding: 10px 15px;
     margin-bottom: 15px;
 }
 
 .task-title {
-    font-size: 18px;
+    font-size: 20px;
 }
 
 .button {
     font-size: 15px;
     cursor: pointer;
     border: none;
-}
-
-.btn-action {
-    color: rgb(28, 25, 233);
-}
-
-.btn-action1 {
-    color: green;
-}
-
-.btn-action2 {
-    color: red;
+    background-color: transparent;
 }
 
 .textP {
-    font-size: 18px;
-    color: red;
+    font-size: 25px;
+    color: var(--text-emptyTask);
 }
 
-.checked{
-    color: #555;
+.checked {
+    color: var(--text-checked);
     text-decoration: line-through;
 }
 
-.editable{
-    color: red;
-}
-
-.up {
-    width: 1px;
-    height: 13px;
-    border-top: 1px solid red;
-    border-right: 1px solid red;
-    transform: rotate(-45deg);
-    margin-right: 5px;
-}
-
-.down {
-    width: 1px;
-    height: 13px;
-    border-top: 1px solid red;
-    border-right: 1px solid red;
-    transform: rotate(135deg);
+.icon-img {
+    pointer-events: none;
+    width: 20px;
+    height: 20px;
 }

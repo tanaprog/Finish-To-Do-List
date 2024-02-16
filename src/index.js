@@ -97,20 +97,20 @@ function renderTasks() {
                      contenteditable = ${task.isEdit}
                      class="${cssClass}">${task.text}</span>
                      
-                     <div class="button">
+                     <div class="buttons">
+                     <button type="button" data-action="up" class="button up"><img class="icon-img" src="img/btn-upp.png" alt="icon button"></button>
+                     <button type="button" data-action="down" class="button down"><img class="icon-img" src="img/btn-down.png" alt="icon button"></button>
                      ${task.isEdit
-                ? `<button type="button" data-action="save" class="btn-action button">save</button>`
-                : `<button type="button" data-action="edit" class="btn-action button">ed</button>`
+                ? `<button type="button" data-action="save" class="btn-action button"><img class="icon-img" src="img/save.png" alt="save button"></button>`
+                : `<button type="button" data-action="edit" class="btn-action button"><img class="icon-img" src="img/edit.png" alt="edit button"></button>`
             }
-                     <button type="button" data-action="up" class="button up"></button>
-                     <button type="button" data-action="down" class="button down"></button>
-                     <button type="button" data-action="done" class="btn-action1 button">ok</button>
-                     <button type="button" data-action="delete" class="btn-action2 button">x</button>
+                     
+                     <button type="button" data-action="done" class="btn-action1 button"><img class="icon-img" src="img/checked.png" alt="checked button"></button>
+                     <button type="button" data-action="delete" class="btn-action2 button"><img class="icon-img" src="img/delete.png" alt="delete button"></button>
                      </div>
                     `;
 
         item.innerHTML = taskUI;
-
         tasksUl.appendChild(item);
     });
 }
