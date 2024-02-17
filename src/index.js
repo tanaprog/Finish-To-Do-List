@@ -117,7 +117,7 @@ function renderTasks() {
 
 function emptyTask() {
     const text = createElement('p', 'textP');
-    text.innerHTML = 'You must to Add a task...';
+    text.innerHTML = 'You must Add a task...';
     textError.innerHTML = "";
     textError.appendChild(text);
 }
